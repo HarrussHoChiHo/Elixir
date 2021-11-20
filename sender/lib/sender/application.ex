@@ -7,8 +7,13 @@ defmodule Sender.Application do
 
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Sender.Worker.start_link(arg)
-      # {Sender.Worker, arg}
+      %{
+        id: Sender.EmailTaskSupervisor,
+        start: {Task.Supervisor,
+        start_link:
+        [[name: Sender.EmaiTaskSupervisor]]
+      }
+    }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
