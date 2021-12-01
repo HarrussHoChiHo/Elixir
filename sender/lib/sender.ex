@@ -13,7 +13,9 @@ defmodule Sender do
 
   """
 
-  def send_email("konnichiwa@world.com" = _email), do: :error
+  def send_email("konnichiwa@world.com" = _email) do
+    :error
+  end
 
   def send_email(email) do
     Process.sleep(3000)
