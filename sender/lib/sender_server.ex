@@ -18,7 +18,7 @@ defmodule SendServer do
         {:ok, "email_sent"} -> "sent"
         :error -> "failed"
       end
-
+    IO.puts(:stdio,status)
     emails = [%{email: email, status: status, retries: 0}] ++ state.emails
 
     {:noreply, %{state | emails: emails}}
