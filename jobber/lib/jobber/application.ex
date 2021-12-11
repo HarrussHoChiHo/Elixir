@@ -14,6 +14,7 @@ defmodule Jobber.Application do
       name: Jobber.JobRunner
     ]
     children = [
+      {Registry, keys: :unique, name: Jobber.JobRegistry},
       {DynamicSupervisor, job_runner_config}
     ]
 
@@ -22,4 +23,5 @@ defmodule Jobber.Application do
     opts = [strategy: :one_for_one, name: Jobber.Supervisor]
     Supervisor.start_link(children, opts)
   end
+
 end
