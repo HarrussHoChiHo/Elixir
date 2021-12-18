@@ -1,4 +1,4 @@
-defmodule PageCunsumer do
+defmodule PageConsumer do
   use GenStage
   require Logger
 
