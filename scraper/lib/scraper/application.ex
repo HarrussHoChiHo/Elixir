@@ -10,11 +10,10 @@ defmodule Scraper.Application do
     children = [
       # Starts a worker by calling: Scraper.Worker.start_link(arg)
       # {Scraper.Worker, arg}
-      {Registry, keys: :unique, name: ProducerConsumerRegistry},
+
       PageProducer,
-      producer_consumer_spec(id: 1),
-      producer_consumer_spec(id: 2),
-      PageConsumerSupervisor
+      PageConsumerSupervisor,
+      OnlinePageProducerConsumer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

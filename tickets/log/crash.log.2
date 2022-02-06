@@ -1,0 +1,134 @@
+2022-01-31 06:46:00 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_connection:init/1
+    pid: <0.382.0>
+    registered_name: []
+    exception exit: {{socket_error,timeout},[{gen_server,handle_common_reply,8,[{file,"gen_server.erl"},{line,811}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+    ancestors: [<0.380.0>,amqp_sup,<0.301.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.380.0>,<0.317.0>]
+    dictionary: [{gen_server_call_timeout,70000},{process_name,{amqp_gen_connection,<<"client 127.0.0.1:52049 -> 127.0.0.1:5672">>}}]
+    trap_exit: true
+    status: running
+    heap_size: 6772
+    stack_size: 29
+    reductions: 14043
+  neighbours:
+2022-01-31 06:46:00 =SUPERVISOR REPORT====
+     Supervisor: {<0.381.0>,amqp_connection_type_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.386.0>},{id,main_reader},{mfargs,{amqp_main_reader,start_link,[#Port<0.9>,<0.382.0>,<0.384.0>,{method,rabbit_framing_amqp_0_9_1},<<"client 127.0.0.1:52049 -> 127.0.0.1:5672">>]}},{restart_type,transient},{shutdown,300000},{child_type,worker}]
+
+2022-01-31 06:46:00 =SUPERVISOR REPORT====
+     Supervisor: {<0.380.0>,amqp_connection_sup}
+     Context:    child_terminated
+     Reason:     {socket_error,timeout}
+     Offender:   [{pid,<0.382.0>},{id,connection},{mfargs,{amqp_gen_connection,start_link,[<0.381.0>,{amqp_params_network,<<"guest">>,{plaintext,<<"guest">>},<<"/">>,"localhost",5672,0,0,10,50000,none,[fun amqp_auth_mechanisms:plain/3,fun amqp_auth_mechanisms:amqplain/3],[],[]}]}},{restart_type,intrinsic},{shutdown,brutal_kill},{child_type,worker}]
+
+2022-01-31 06:46:00 =SUPERVISOR REPORT====
+     Supervisor: {<0.380.0>,amqp_connection_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.382.0>},{id,connection},{mfargs,{amqp_gen_connection,start_link,[<0.381.0>,{amqp_params_network,<<"guest">>,{plaintext,<<"guest">>},<<"/">>,"localhost",5672,0,0,10,50000,none,[fun amqp_auth_mechanisms:plain/3,fun amqp_auth_mechanisms:amqplain/3],[],[]}]}},{restart_type,intrinsic},{shutdown,brutal_kill},{child_type,worker}]
+
+2022-01-31 16:40:21 =ERROR REPORT====
+** Generic server <0.401.0> terminating 
+** Last message in was {timeout,#Ref<0.1774035890.223346692.73778>,idle_timeout}
+** When Server state == {state,#Port<0.10>,#Ref<0.1774035890.223346692.73778>,<0.397.0>,<0.399.0>,{method,rabbit_framing_amqp_0_9_1},{expecting_header,<<>>}}
+** Reason for termination ==
+** {socket_error,timeout}
+2022-01-31 16:40:21 =CRASH REPORT====
+  crasher:
+    initial call: amqp_main_reader:init/1
+    pid: <0.401.0>
+    registered_name: []
+    exception exit: {{socket_error,timeout},[{gen_server,handle_common_reply,8,[{file,"gen_server.erl"},{line,811}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+    ancestors: [<0.396.0>,<0.395.0>,amqp_sup,<0.301.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.396.0>,#Port<0.10>]
+    dictionary: [{gen_server_call_timeout,70000},{process_name,{amqp_main_reader,<<"client 127.0.0.1:52103 -> 127.0.0.1:5672">>}}]
+    trap_exit: false
+    status: running
+    heap_size: 2586
+    stack_size: 29
+    reductions: 3122
+  neighbours:
+2022-01-31 16:40:21 =SUPERVISOR REPORT====
+     Supervisor: {<0.396.0>,amqp_connection_type_sup}
+     Context:    child_terminated
+     Reason:     {socket_error,timeout}
+     Offender:   [{pid,<0.401.0>},{id,main_reader},{mfargs,{amqp_main_reader,start_link,[#Port<0.10>,<0.397.0>,<0.399.0>,{method,rabbit_framing_amqp_0_9_1},<<"client 127.0.0.1:52103 -> 127.0.0.1:5672">>]}},{restart_type,transient},{shutdown,300000},{child_type,worker}]
+
+2022-01-31 16:40:21 =SUPERVISOR REPORT====
+     Supervisor: {<0.396.0>,amqp_connection_type_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.401.0>},{id,main_reader},{mfargs,{amqp_main_reader,start_link,[#Port<0.10>,<0.397.0>,<0.399.0>,{method,rabbit_framing_amqp_0_9_1},<<"client 127.0.0.1:52103 -> 127.0.0.1:5672">>]}},{restart_type,transient},{shutdown,300000},{child_type,worker}]
+
+2022-01-31 16:40:21 =ERROR REPORT====
+** Generic server <0.397.0> terminating 
+** Last message in was {socket_error,timeout}
+** When Server state == {state,amqp_network_connection,{state,#Port<0.10>,<<"client 127.0.0.1:52103 -> 127.0.0.1:5672">>,10,<0.400.0>,131072,<0.396.0>,undefined,false},<0.399.0>,{amqp_params_network,<<"guest">>,{plaintext,<<"guest">>},<<"/">>,"localhost",5672,0,0,10,50000,none,[fun amqp_auth_mechanisms:plain/3,fun amqp_auth_mechanisms:amqplain/3],[],[]},2047,[{<<"capabilities">>,table,[{<<"publisher_confirms">>,bool,true},{<<"exchange_exchange_bindings">>,bool,true},{<<"basic.nack">>,bool,true},{<<"consumer_cancel_notify">>,bool,true},{<<"connection.blocked">>,bool,true},{<<"consumer_priorities">>,bool,true},{<<"authentication_failure_close">>,bool,true},{<<"per_consumer_qos">>,bool,true},{<<"direct_reply_to">>,bool,true}]},{<<"cluster_name">>,longstr,<<"rabbit@Haruss-MacBook-Pro">>},{<<"copyright">>,longstr,<<"Copyright (c) 2007-2022 VMware, Inc. or its affiliates.">>},{<<"information">>,longstr,<<"Licensed under the MPL 2.0. Website: https://rabbitmq.com">>},{<<"platform">>,longstr,<<"Erlang/OTP 24.2.1">>},{<<"product">>,longstr,<<"RabbitMQ">>},{<<"version">>,longstr,<<"3.9.13">>}],none,false}
+** Reason for termination ==
+** {socket_error,timeout}
+2022-01-31 16:40:22 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_connection:init/1
+    pid: <0.397.0>
+    registered_name: []
+    exception exit: {{socket_error,timeout},[{gen_server,handle_common_reply,8,[{file,"gen_server.erl"},{line,811}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,226}]}]}
+    ancestors: [<0.395.0>,amqp_sup,<0.301.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.395.0>,<0.317.0>]
+    dictionary: [{gen_server_call_timeout,70000},{process_name,{amqp_gen_connection,<<"client 127.0.0.1:52103 -> 127.0.0.1:5672">>}}]
+    trap_exit: true
+    status: running
+    heap_size: 6772
+    stack_size: 29
+    reductions: 14043
+  neighbours:
+2022-01-31 16:40:22 =SUPERVISOR REPORT====
+     Supervisor: {<0.395.0>,amqp_connection_sup}
+     Context:    child_terminated
+     Reason:     {socket_error,timeout}
+     Offender:   [{pid,<0.397.0>},{id,connection},{mfargs,{amqp_gen_connection,start_link,[<0.396.0>,{amqp_params_network,<<"guest">>,{plaintext,<<"guest">>},<<"/">>,"localhost",5672,0,0,10,50000,none,[fun amqp_auth_mechanisms:plain/3,fun amqp_auth_mechanisms:amqplain/3],[],[]}]}},{restart_type,intrinsic},{shutdown,brutal_kill},{child_type,worker}]
+
+2022-01-31 16:40:22 =SUPERVISOR REPORT====
+     Supervisor: {<0.395.0>,amqp_connection_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.397.0>},{id,connection},{mfargs,{amqp_gen_connection,start_link,[<0.396.0>,{amqp_params_network,<<"guest">>,{plaintext,<<"guest">>},<<"/">>,"localhost",5672,0,0,10,50000,none,[fun amqp_auth_mechanisms:plain/3,fun amqp_auth_mechanisms:amqplain/3],[],[]}]}},{restart_type,intrinsic},{shutdown,brutal_kill},{child_type,worker}]
+
+2022-01-31 16:40:22 =ERROR REPORT====
+** Generic server 'Elixir.BookingsPipeline.Broadway.Producer_0' terminating 
+** Last message in was {'DOWN',#Ref<0.1774035890.223346692.73767>,process,<0.411.0>,shutdown}
+** When Server state == #{consumers => [{<0.326.0>,#Ref<0.1774035890.223346691.74282>},{<0.325.0>,#Ref<0.1774035890.223346691.74281>},{<0.324.0>,#Ref<0.1774035890.223346691.74280>},{<0.323.0>,#Ref<0.1774035890.223346691.74279>},{<0.322.0>,#Ref<0.1774035890.223346691.74278>},{<0.321.0>,#Ref<0.1774035890.223346691.74277>},{<0.320.0>,#Ref<0.1774035890.223346691.74276>},{<0.319.0>,#Ref<0.1774035890.223346691.74275>}],module => 'Elixir.BroadwayRabbitMQ.Producer',module_state => #{backoff => #{'__struct__' => 'Elixir.BroadwayRabbitMQ.Backoff',max => 30000,min => 1000,state => {1000,10000,{rand,{#{jump => #Fun<rand.3.92093067>,max => 288230376151711743,next => #Fun<rand.5.92093067>,type => exsplus},[208216690759521377|7912055329777037]}}},type => rand_exp},channel => #{'__struct__' => 'Elixir.AMQP.Channel',conn => #{'__struct__' => 'Elixir.AMQP.Connection',pid => <0.397.0>},custom_consumer => nil,pid => <0.411.0>},channel_ref => #Ref<0.1774035890.223346692.73767>,client => 'Elixir.BroadwayRabbitMQ.AmqpClient',config => #{after_connect => #Fun<Elixir.BroadwayRabbitMQ.AmqpClient.1.79355542>,bindings => [],connection => [],consume_options => [],declare_opts => [{durable,true}],metadata => [],name => undefined,qos => [{prefetch_count,50}],queue => <<"bookings_queue">>},consumer_tag => <<"amq.ctag-v7uaWGZ_HpJztyxQl_BPtQ">>,on_failure => reject_and_requeue,on_success => ack,opts => [{broadway,[{index,0},{hibernate_after,15000},{batchers,[]},{context,context_not_set},{resubscribe_interval,100},{max_seconds,5},{max_restarts,3},{shutdown,30000},{name,'Elixir.BookingsPipeline'},{producer,[{hibernate_after,15000},{transformer,nil},{concurrency,1},{module,{'Elixir.BroadwayRabbitMQ.Producer',[{queue,<<"bookings_queue">>},{declare,[{durable,true}]},{on_failure,reject_and_requeue}]}}]},{processors,[{default,[{hibernate_after,15000},{max_demand,10},{concurrency,8}]}]}]},{queue,<<"bookings_queue">>},{declare,[{durable,true}]}]},rate_limiting => nil,transformer => nil}
+** Reason for termination ==
+** {{{socket_error,timeout},{gen_server,call,[<0.397.0>,{command,{close,{'connection.close',200,<<"Goodbye">>,0,0},70000}},70000]}},[{gen_server,call,3,[{file,"gen_server.erl"},{line,247}]},{'Elixir.AMQP.Connection',close,1,[{file,"lib/amqp/connection.ex"},{line,229}]},{'Elixir.BroadwayRabbitMQ.Producer',disconnect,1,[{file,"lib/broadway_rabbitmq/producer.ex"},{line,552}]},{'Elixir.BroadwayRabbitMQ.Producer',handle_info,2,[{file,"lib/broadway_rabbitmq/producer.ex"},{line,423}]},{'Elixir.Broadway.Topology.ProducerStage',handle_info,2,[{file,"lib/broadway/topology/producer_stage.ex"},{line,228}]},{'Elixir.GenStage',noreply_callback,3,[{file,"lib/gen_stage.ex"},{line,2117}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]}]}
+2022-01-31 16:40:22 =CRASH REPORT====
+  crasher:
+    initial call: Elixir.GenStage:init/1
+    pid: <0.317.0>
+    registered_name: 'Elixir.BookingsPipeline.Broadway.Producer_0'
+    exception exit: {{{socket_error,timeout},{gen_server,call,[<0.397.0>,{command,{close,{'connection.close',200,<<"Goodbye">>,0,0},70000}},70000]}},[{gen_server,call,3,[{file,"gen_server.erl"},{line,247}]},{'Elixir.AMQP.Connection',close,1,[{file,"lib/amqp/connection.ex"},{line,229}]},{'Elixir.BroadwayRabbitMQ.Producer',disconnect,1,[{file,"lib/broadway_rabbitmq/producer.ex"},{line,552}]},{'Elixir.BroadwayRabbitMQ.Producer',handle_info,2,[{file,"lib/broadway_rabbitmq/producer.ex"},{line,423}]},{'Elixir.Broadway.Topology.ProducerStage',handle_info,2,[{file,"lib/broadway/topology/producer_stage.ex"},{line,228}]},{'Elixir.GenStage',noreply_callback,3,[{file,"lib/gen_stage.ex"},{line,2117}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,695}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,771}]}]}
+    ancestors: ['Elixir.BookingsPipeline.Broadway.ProducerSupervisor','Elixir.BookingsPipeline.Broadway.Supervisor','Elixir.BookingsPipeline','Elixir.Tickets.Supervisor',<0.312.0>]
+    message_queue_len: 1
+    messages: [{'EXIT',<0.397.0>,{socket_error,timeout}}]
+    links: [<0.316.0>]
+    dictionary: [{gen_server_call_timeout,70000}]
+    trap_exit: true
+    status: running
+    heap_size: 6772
+    stack_size: 29
+    reductions: 116507
+  neighbours:
+2022-01-31 16:40:22 =SUPERVISOR REPORT====
+     Supervisor: {local,'Elixir.BookingsPipeline.Broadway.ProducerSupervisor'}
+     Context:    child_terminated
+     Reason:     {{socket_error,timeout},{gen_server,call,[<0.397.0>,{command,{close,{'connection.close',200,<<"Goodbye">>,0,0},70000}},70000]}}
+     Offender:   [{pid,<0.317.0>},{id,'Elixir.BookingsPipeline.Broadway.Producer_0'},{mfargs,{'Elixir.Broadway.Topology.ProducerStage',start_link,[[{broadway,[{hibernate_after,15000},{batchers,[]},{context,context_not_set},{resubscribe_interval,100},{max_seconds,5},{max_restarts,3},{shutdown,30000},{name,'Elixir.BookingsPipeline'},{producer,[{hibernate_after,15000},{transformer,nil},{concurrency,1},{module,{'Elixir.BroadwayRabbitMQ.Producer',[{queue,<<"bookings_queue">>},{declare,[{durable,true}]},{on_failure,reject_and_requeue}]}}]},{processors,[{default,[{hibernate_after,15000},{max_demand,10},{concurrency,8}]}]}]},{dispatcher,'Elixir.GenStage.DemandDispatcher'},{hibernate_after,15000},{transformer,nil},{concurrency,1},{module,{'Elixir.BroadwayRabbitMQ.Producer',[{queue,<<"bookings_queue">>},{declare,[{durable,true}]},{on_failure,reject_and_requeue}]}}],0,[{name,'Elixir.BookingsPipeline.Broadway.Producer_0'},{hibernate_after,15000}]]}},{restart_type,permanent},{significant,false},{shutdown,30000},{child_type,worker}]
+

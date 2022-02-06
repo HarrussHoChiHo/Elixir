@@ -10,13 +10,15 @@ defmodule Airports do
 
   def open_airports() do
     window = Flow.Window.trigger_every(Flow.Window.global(), 1000)
+
     airport_csv()
     |> File.stream!()
     |> Stream.map(fn event ->
       Process.sleep(Enum.random([0,0,0,1]))
+      event
     end)
     |> Flow.from_enumerable()
-    |> Flow.partition(window: window, key: {:key, :contry})
+    |> Flow.partition(stages: 1, window: window, key: {:key, :contry})
     |> Flow.group_by(& &1.country)
     |> Flow.on_trigger(fn acc, _partition_info, {_type, _id, trigger} ->
       events =
