@@ -17,6 +17,8 @@ defmodule BookingsPipeline do
         default: []
       ],
       batchers: [
+        cinema: [],
+        musical: [],
         default: []
       ]
     ]
@@ -26,11 +28,17 @@ defmodule BookingsPipeline do
 
   def handle_message(_processor, message, _context) do
 
-    %{data: %{event: event, user: user}} = message
-    if Tickets.tickets_available?(event) do
-      Tickets.create_ticket(user, event)
-      Tickets.send_email(user)
-      IO.inspect(message, label: "Message")
+    if Tickets.tickets_available?(message.data.event) do
+      case message do
+        %{data: %{event: "cinema"}} = message ->
+          Broadway.Message.put_batcher(message, :cinema)
+
+        %{data: %{event: "musical"}} = message ->
+          Broadway.Message.put_batcher(message, :musical)
+
+        message ->
+          message
+      end
     else
       Broadway.Message.failed(message, "bookings-closed")
     end
@@ -48,7 +56,15 @@ defmodule BookingsPipeline do
   end
 
   def handle_batch(_batcher, messages, batch_info, _context) do
-    IO.inspect(batch_info, label: "#{inspect(self())}Batch")
+    IO.puts("#{inspect(self())} Batch #{batch_info.batcher}")
+
+    messages
+    |> Tickets.insert_all_tickets()
+    |> Enum.each(fn message ->
+      channel = message.metadata.amqp_channel
+      payload = "email,#{message.data.user.email}"
+      AMQP.Basic.publish(channel, "", "notification_queue", payload)
+    end)
 
     messages
   end
